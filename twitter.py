@@ -1,4 +1,5 @@
 import tweepy
+import re
 from random import randint
 from os.path import exists
 
@@ -44,7 +45,18 @@ def get_all_tweets(screen_name):
 
 		f.close()
 
+	with open(screen_name + '.txt', 'r') as myfile:
+   	    data = myfile.read().replace('\n', '')
+        data= re.sub(r"http\S+", "",data)
+
+	g = open(screen_name + '.txt','w')
+	
+	g.write(data)
+
+	g.close()
+
+
 	pass
 
 if __name__ == '__main__':
-	get_all_tweets("quit_cryan")
+	get_all_tweets("realdonaldtrump")
