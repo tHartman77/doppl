@@ -1,9 +1,8 @@
 import markovify
 import tweepy
 import re
-from random import randint
-from os.path import exists
 import sys
+from os.path import exists
 
 consumer_key 		= '***REMOVED***'
 consumer_secret		= '***REMOVED***'
