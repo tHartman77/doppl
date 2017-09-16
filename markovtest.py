@@ -68,4 +68,4 @@ def get_markov_tweet(screen_name):
 	for i in range(1):
 	    print(text_model.make_short_sentence(140))
 
-get_markov_tweet("BillLaboon")
+#get_markov_tweet("BillLaboon")
