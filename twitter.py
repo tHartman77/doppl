@@ -1,4 +1,5 @@
 import tweepy
+import re
 
 consumer_key 		= '***REMOVED***'
 consumer_secret		= '***REMOVED***'
@@ -35,12 +36,25 @@ def get_all_tweets(screen_name):
 
 	outtweets = [tweet.text.encode("utf-8") for tweet in alltweets]
 
+
+
 	f = open(screen_name + '.txt','w')
 	
 	for tweet in outtweets:
 		f.write(tweet)
 
 	f.close()
+
+	with open(screen_name + '.txt', 'r') as myfile:
+   	    data = myfile.read().replace('\n', '')
+        data= re.sub(r"http\S+", "",data)
+
+	g = open(screen_name + '.txt','w')
+	
+	g.write(data)
+
+	g.close()
+
 
 	pass
 
