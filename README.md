@@ -1,2 +1,2 @@
-# dopple
+# doppel
 HACKMIT project
