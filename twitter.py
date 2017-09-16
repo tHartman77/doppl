@@ -45,4 +45,4 @@ def get_all_tweets(screen_name):
 	pass
 
 if __name__ == '__main__':
-	get_all_tweets("quit_cryan")
+	get_all_tweets("realdonaldtrump")
