@@ -44,14 +44,15 @@ def get_all_tweets(screen_name):
 
 	f = open(screen_name + '.txt','w')
 		
-	for tweet in outtweets:
-		f.write(tweet + "\r\n")
+		for tweet in outtweets:
+
+			print(tweet)
+			tweet= re.sub(r"http\S+", "",tweet)
+			print(type('') is str)
+
+		  f.write(tweet + "\r\n")
 
 	f.close()
-
-	with open(screen_name + '.txt', 'r') as myfile:
-   	    data = myfile.read().replace('\n', '')
-        data= re.sub(r"http\S+", "",data)
 
 	g = open(screen_name + '.txt','w')
 	
