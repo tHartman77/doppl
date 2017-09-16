@@ -2,6 +2,7 @@ import tweepy
 import re
 from random import randint
 from os.path import exists
+import sys
 
 consumer_key 		= '***REMOVED***'
 consumer_secret		= '***REMOVED***'
@@ -14,6 +15,10 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 def get_all_tweets(screen_name):
+
+	if exists(screen_name + ".txt") :
+		sys.exit()
+
 	alltweets = []
 
 	new_tweets = api.user_timeline(screen_name = screen_name, count=200)
@@ -35,15 +40,14 @@ def get_all_tweets(screen_name):
 		
 		print "...%s tweets downloaded so far" % (len(alltweets))
 
-	outtweets = [(tweet.text.encode("utf-8") + " " + str(tweet.favorite_count) + " " + str(tweet.retweet_count) + "\n") for tweet in alltweets]
+	outtweets = [(tweet.text.encode("utf-8") + " " + str(tweet.favorite_count) + " " + str(tweet.retweet_count)) for tweet in alltweets]
 
-	if not exists("home/Documents/Twitter/doppel/" + screen_name + ".txt") :
-		f = open(screen_name + '.txt','w')
+	f = open(screen_name + '.txt','w')
 		
-		for tweet in outtweets:
-			f.write(tweet)
+	for tweet in outtweets:
+		f.write(tweet + "\r\n")
 
-		f.close()
+	f.close()
 
 	with open(screen_name + '.txt', 'r') as myfile:
    	    data = myfile.read().replace('\n', '')
@@ -59,4 +63,4 @@ def get_all_tweets(screen_name):
 	pass
 
 if __name__ == '__main__':
-	get_all_tweets("realdonaldtrump")
+	get_all_tweets("quit_cryan")
