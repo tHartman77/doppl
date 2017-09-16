@@ -1,4 +1,6 @@
 import tweepy
+from random import randint
+from os.path import exists
 
 consumer_key 		= '***REMOVED***'
 consumer_secret		= '***REMOVED***'
@@ -16,7 +18,6 @@ def get_all_tweets(screen_name):
 	new_tweets = api.user_timeline(screen_name = screen_name, count=200)
 
 	alltweets.extend(new_tweets)
-
 	oldest = alltweets[-1].id - 1
 
 	while (len(new_tweets) > 0):
@@ -33,14 +34,15 @@ def get_all_tweets(screen_name):
 		
 		print "...%s tweets downloaded so far" % (len(alltweets))
 
-	outtweets = [tweet.text.encode("utf-8") for tweet in alltweets]
+	outtweets = [(tweet.text.encode("utf-8") + " " + str(tweet.favorite_count) + " " + str(tweet.retweet_count) + "\n") for tweet in alltweets]
 
-	f = open(screen_name + '.txt','w')
-	
-	for tweet in outtweets:
-		f.write(tweet)
+	if not exists("home/Documents/Twitter/doppel/" + screen_name + ".txt") :
+		f = open(screen_name + '.txt','w')
+		
+		for tweet in outtweets:
+			f.write(tweet)
 
-	f.close()
+		f.close()
 
 	pass
 
