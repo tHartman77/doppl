@@ -1,9 +1,11 @@
 $(function() {
+   
 var submit_form = function(e){ 
   $.getJSON($SCRIPT_ROOT + '/_get_tweet', {
     handle: $('input[name="handle"]').val(),
   }, function(data) {
     make_tweet_ui(data.result);
+    pick_random_user()
     //$('#result').text(data.result);
     $('input[name=handle]').focus().select();
   });
@@ -17,6 +19,13 @@ $('input[type=text]').bind('keydown', function(e) {
 });
 $('input[name=handle]').focus();
 
+
+function pick_random_user()
+{
+  var users = ['katyperry','justinbieber','realDonaldTrump','BarackObama','rihanna','TheEllenShow','ladygaga','jtimberlake','Cristiano','KimKardashian','britneyspears','selenagomez','ArianaGrande','jimmyfallon'];
+  var user = users[Math.floor(Math.random() * users.length)];
+  $('#tweetlabel').html("<label>" + user + "</label>");
+}
 function make_tweet_ui(tweet_text) {
     var id = Math.floor(Math.random() * 500);
     $("#tweet").prepend("<div id=" + id + "></div>");
@@ -34,4 +43,7 @@ function make_tweet_ui(tweet_text) {
         html.innerHTML = tweet_text;
     });
 }
+pick_random_user();
+
 });
+
