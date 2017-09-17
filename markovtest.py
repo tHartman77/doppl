@@ -2,6 +2,7 @@ import markovify
 import tweepy
 import re
 import sys
+import random
 from os.path import exists
 
 consumer_key        = '***REMOVED***'
@@ -24,7 +25,7 @@ def get_all_tweets(screen_name):
     alltweets = []
 
     new_tweets = api.user_timeline(screen_name = screen_name, count=200)
-
+    
     alltweets.extend(new_tweets)
     oldest = alltweets[-1].id - 1
     #print(oldest)
@@ -55,6 +56,16 @@ def get_all_tweets(screen_name):
 
     return outtweets
 
+def get_rand_tweet_id(screen_name):
+    alltweets = []
+
+    new_tweets = api.user_timeline(screen_name = screen_name, count=10)
+
+    alltweets.extend(new_tweets)
+    rand_id = alltweets[random.randint(0,len(alltweets))].id
+    return str(rand_id)
+     
+
 def get_markov_tweet(screen_name):
 
     text = "".join(get_all_tweets(screen_name))
@@ -68,5 +79,3 @@ def get_markov_tweet(screen_name):
 
     # Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
-
-#get_all_tweets("quit_cryan")
