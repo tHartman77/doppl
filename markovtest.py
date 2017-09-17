@@ -55,17 +55,16 @@ def get_all_tweets(screen_name):
 
 def get_markov_tweet(screen_name):
 
-	text = "".join(get_all_tweets(screen_name))
+    text = "".join(get_all_tweets(screen_name))
 
 	# Build the model.
-	text_model = markovify.Text(text)
+    text_model = markovify.Text(text)
 
 	# Print five randomly-generated sentences
 	# for i in range(5):
 	#    print(text_model.make_sentence())
 
 	# Print three randomly-generated sentences of no more than 140 characters
-	for i in range(1):
-	    print(text_model.make_short_sentence(140))
+    return text_model.make_short_sentence(140)
 
-#get_markov_tweet("BillLaboon")
+print(get_markov_tweet("BillLaboon"))
