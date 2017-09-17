@@ -13,7 +13,11 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
+global retweets
+global favorites
 
+retweets = 0
+favorites = 0
 def get_all_tweets(screen_name):
 
 
@@ -40,18 +44,21 @@ def get_all_tweets(screen_name):
 
 	outtweets = [(tweet.text.encode("utf-8") + " ") for tweet in alltweets]
 
+	retweets = 0
+	favorites = 0
+
+	for tweet in alltweets:
+		retweets	+= tweet.retweet_count
+		favorites	+= tweet.favorite_count
+
 	#f = open(screen_name + '.txt','w')
-		
-	for tweet in range(0,len(outtweets)):
-
-		outtweets[tweet]= re.sub(r"http\S+", "somelink.com",outtweets[tweet])
-
-
 	
-
+	for tweet in range(0,len(outtweets)):
+		re.sub(r"http\S+", "somelink.com",outtweets[tweet])
 
 	return outtweets
 
+"""
 def get_markov_tweet(screen_name):
 
     text = "".join(get_all_tweets(screen_name))
@@ -64,6 +71,23 @@ def get_markov_tweet(screen_name):
 	#    print(text_model.make_sentence())
 
 	# Print three randomly-generated sentences of no more than 140 characters
+	for i in range(1):
+	    print(text_model.make_short_sentence(140) + " " + str(favorites) + " " + str(retweets))
+
+get_markov_tweet("quit_cryan")
+"""
+def get_markov_tweet(screen_name):
+
+    text = "".join(get_all_tweets(screen_name))
+
+    # Build the model.
+    text_model = markovify.Text(text)
+
+    # Print five randomly-generated sentences
+    # for i in range(5):
+    #    print(text_model.make_sentence())
+
+    # Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
 
-#print(get_markov_tweet("BillLaboon"))
+print(get_markov_tweet("BillLaboon"))
