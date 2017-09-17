@@ -2,6 +2,7 @@ import markovify
 import tweepy
 import re
 import sys
+import random
 from os.path import exists
 
 consumer_key        = '***REMOVED***'
@@ -13,11 +14,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
-global retweets
-global favorites
 
-retweets = 0
-favorites = 0
 def get_all_tweets(screen_name):
 
 
@@ -54,6 +51,17 @@ def get_all_tweets(screen_name):
         #print(outtweets[tweet])    
 
     return outtweets
+
+def get_rand_id(screen_name):
+    alltweets = []
+
+    new_tweets = api.user_timeline(screen_name = screen_name, count=20)
+
+    alltweets.extend(new_tweets)
+
+    tweet_id = alltweets[randint(0, len(alltweets)/2)].id
+
+    return tweet_id
 
 def get_markov_tweet(screen_name):
 
