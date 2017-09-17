@@ -18,10 +18,13 @@ $('input[type=text]').bind('keydown', function(e) {
 $('input[name=handle]').focus();
 
 function make_tweet_ui(tweet_text) {
+    var id = Math.floor(Math.random() * 500);
+    $("#tweet").prepend("<div id=" + id + "></div>");
+    console.log($("#tweet"));
     twttr.widgets.createTweet(
       
       // Replace this with the Tweet ID
-      '909216885530558464', document.getElementById("tweet"))
+      '909216885530558464', document.getElementById("" + id))
       .then(function(el) {
 
         var e = el.contentDocument;
