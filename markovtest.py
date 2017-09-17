@@ -63,8 +63,8 @@ def get_rand_tweet_id(screen_name):
 
     alltweets.extend(new_tweets)
     rand_id = alltweets[random.randint(0,len(alltweets))].id
-    return str(rand_id)
-     
+    #return str(rand_id)
+    return '909216885530558464'
 
 def get_markov_tweet(screen_name):
 
