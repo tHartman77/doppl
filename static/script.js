@@ -31,11 +31,11 @@ function make_tweet_ui(tweet_text, rand_id) {
     var id = Math.floor(Math.random() * 500);
     $("#tweet").prepend("<div id=" + id + "></div>");
     twttr.widgets.createTweet(
-      
       // Replace this with the Tweet ID
       rand_id, document.getElementById("" + id),
       {
         conversation: 'none',
+        cards: 'hidden',
       }).then(function(el) {
         
         var e = el.contentDocument;
