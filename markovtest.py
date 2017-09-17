@@ -3,6 +3,7 @@ import tweepy
 import re
 import sys
 from os.path import exists
+import random
 
 consumer_key 		= '***REMOVED***'
 consumer_secret		= '***REMOVED***'
@@ -43,10 +44,14 @@ def get_all_tweets(screen_name):
 	#f = open(screen_name + '.txt','w')
 		
 	for tweet in range(0,len(outtweets)):
+	    outtweets[tweet]= re.sub(r"http\S+", "",outtweets[tweet])
+        if(outtweets[tweet].startswith("RT")):
+            outtweets[tweet] = ""
+        outtweets[tweet] = outtweets[tweet].replace("&lt;", "<")
+        outtweets[tweet] = outtweets[tweet].replace("&gt;", ">")
+        outtweets[tweet] = outtweets[tweet].replace("&amp;", "&")
+        #print(outtweets[tweet])    
 
-		outtweets[tweet]= re.sub(r"http\S+", "somelink.com",outtweets[tweet])
-		if(outtweets[tweet].startswith("RT")):
-			outtweets[tweet] = ""
 	return outtweets
 
 def get_markov_tweet(screen_name):

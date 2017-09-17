@@ -22,7 +22,7 @@ function make_tweet_ui(tweet_text) {
     twttr.widgets.createTweet(
       
       // Replace this with the Tweet ID
-      '909216885530558464', document.getElementById("tweet"))
+      '909191177810915328', document.getElementById("tweet"))
       .then(function(el) {
 
         var e = el.contentDocument;
@@ -31,15 +31,9 @@ function make_tweet_ui(tweet_text) {
         var html = e.querySelector(".Tweet-text");
         html.innerHTML = tweet_text;
 
-        // Change the retweet count
-        e.querySelector(".TweetAction--retweet .TweetAction-stat").innerHTML = "123";
-
-        // Change the favorites count
-        e.querySelector(".TweetAction--favorite .TweetAction-stat").innerHTML = "999";
-
-        // Replace the date with text
-        e.querySelector(".dt-updated").innerHTML = "Contact the author of this tweet at amit@labnol.org";
         
     });
 }
 });
+
+
