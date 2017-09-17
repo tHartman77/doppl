@@ -3,10 +3,7 @@ var submit_form = function(e){
   $.getJSON($SCRIPT_ROOT + '/_get_tweet', {
     handle: $('input[name="handle"]').val(),
   }, function(data) {
-    var markov_tweet = data.result;
-    var rand_id = data.id;
-    console.log(data.id);
-    make_tweet_ui(markov_tweet, rand_id);
+    make_tweet_ui(data.result);
     //$('#result').text(data.result);
     $('input[name=handle]').focus().select();
   });
@@ -20,20 +17,28 @@ $('input[type=text]').bind('keydown', function(e) {
 });
 $('input[name=handle]').focus();
 
-function make_tweet_ui(tweet_text, tweet_id) {
-    twttr.widgets.createTweet( 
+function make_tweet_ui(tweet_text) {
+    twttr.widgets.createTweet(
+      
       // Replace this with the Tweet ID
-      tweet_id, document.getElementById("tweet"))
+      '909191177810915328', document.getElementById("tweet"))
       .then(function(el) {
 
         var e = el.contentDocument;
 
         // Change the tweet text
         var html = e.querySelector(".Tweet-text");
-        
-        e.querySelector(".MediaCard-media").style.display = "none";        
-
         html.innerHTML = tweet_text;
+
+        // Change the retweet count
+        e.querySelector(".TweetAction--retweet .TweetAction-stat").innerHTML = "123";
+
+        // Change the favorites count
+        e.querySelector(".TweetAction--favorite .TweetAction-stat").innerHTML = "999";
+
+        // Replace the date with text
+        e.querySelector(".dt-updated").innerHTML = "Contact the author of this tweet at amit@labnol.org";
+        
     });
 }
 });
