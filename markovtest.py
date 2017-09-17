@@ -45,7 +45,7 @@ def get_all_tweets(screen_name):
     outtweets = [(tweet.text.encode("utf-8") + " ") for tweet in alltweets]
 
     for tweet in range(0,len(outtweets)):
-        outtweets[tweet]= re.sub(r"http\S+", "somelink.com",outtweets[tweet])
+        outtweets[tweet]= re.sub(r"http\S+", "",outtweets[tweet])
         if(outtweets[tweet].startswith("RT")):
             outtweets[tweet] = ""
         outtweets[tweet] = outtweets[tweet].replace("&lt;", "<");
