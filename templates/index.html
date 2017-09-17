@@ -1,9 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>doppel</h1>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col"></div>
+  <div class="mdl-cell mdl-cell--4-col">
 <p>
-  <input type="text" size="20" name="handle">
-  <span id="result">    </span>
-<p><a href=# id="tweetButton">get tweet</a>
+    <div>    
+    @
+    <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="tweetButton">
+    <label class="mdl-textfield__label" for="sample1">Text...</label>
+    </div>
+    </div>
+    <span id="result">    </span>
+<p>
 <div id="tweet"></div>
+</div>
+<div class="mdl-cell mdl-cell--4-col"></div>
+</div>
 {% endblock %}
