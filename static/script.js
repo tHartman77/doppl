@@ -21,7 +21,7 @@ function make_tweet_ui(tweet_text) {
     twttr.widgets.createTweet(
       
       // Replace this with the Tweet ID
-      '909191177810915328', document.getElementById("tweet"))
+      '909216885530558464', document.getElementById("tweet"))
       .then(function(el) {
 
         var e = el.contentDocument;
@@ -29,10 +29,6 @@ function make_tweet_ui(tweet_text) {
         // Change the tweet text
         var html = e.querySelector(".Tweet-text");
         html.innerHTML = tweet_text;
-
-        
     });
 }
 });
-
-
