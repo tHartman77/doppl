@@ -47,15 +47,15 @@ def get_all_tweets(screen_name):
 	retweets = 0
 	favorites = 0
 
-	for tweet in alltweets:
-		retweets	+= tweet.retweet_count
-		favorites	+= tweet.favorite_count
-
-	#f = open(screen_name + '.txt','w')
-	
 	for tweet in range(0,len(outtweets)):
-		re.sub(r"http\S+", "somelink.com",outtweets[tweet])
-
+		outtweets[tweet]= re.sub(r"http\S+", "somelink.com",outtweets[tweet])
+		if(outtweets[tweet].startswith("RT")):
+			outtweets[tweet] = ""
+		
+	for tweet in alltweets:
+		favorites	+= tweet.favorite_count
+		retweets	+= tweet.retweet_count
+		
 	return outtweets
 
 """
@@ -90,4 +90,8 @@ def get_markov_tweet(screen_name):
     # Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
 
+<<<<<<<
 print(get_markov_tweet("BillLaboon"))
+=======
+#get_all_tweets("billlaboon")
+>>>>>>>
