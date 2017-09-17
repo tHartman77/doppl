@@ -45,6 +45,9 @@ def get_all_tweets(screen_name):
 	for tweet in range(0,len(outtweets)):
 
 		outtweets[tweet]= re.sub(r"http\S+", "somelink.com",outtweets[tweet])
+		if(outtweets[tweet].startswith("RT"))
+			outtweets[tweet] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		print(outtweets[tweet]);
 
 
 	
@@ -66,4 +69,4 @@ def get_markov_tweet(screen_name):
 	# Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
 
-#print(get_markov_tweet("BillLaboon"))
+get_all_tweets("quit_cryan")
