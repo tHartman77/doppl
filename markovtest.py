@@ -59,7 +59,7 @@ def get_rand_id(screen_name):
 
     alltweets.extend(new_tweets)
 
-    tweet_id = alltweets[randint(0, len(alltweets)/2)].id
+    tweet_id = str(alltweets[random.randint(0, len(alltweets)/2)].id)
 
     return tweet_id
 
