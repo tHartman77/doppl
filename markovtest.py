@@ -40,15 +40,7 @@ def get_all_tweets(screen_name):
         #print "...%s tweets downloaded so far" % (len(alltweets))
 
     outtweets = [(tweet.text.encode("utf-8") + " ") for tweet in alltweets]
-
-    for tweet in range(0,len(outtweets)):
-        outtweets[tweet]= re.sub(r"http\S+", "",outtweets[tweet])
-        if(outtweets[tweet].startswith("RT")):
-            outtweets[tweet] = ""
-        outtweets[tweet] = outtweets[tweet].replace("&lt;", "<");
-        outtweets[tweet] = outtweets[tweet].replace("&gt;", ">");
-        outtweets[tweet] = outtweets[tweet].replace("&amp;", "&");
-        #print(outtweets[tweet])    
+    outtweets = remove_retweets(outtweets)
 
     return outtweets
 
@@ -58,9 +50,13 @@ def get_rand_id(screen_name):
     new_tweets = api.user_timeline(screen_name = screen_name, count=20)
 
     alltweets.extend(new_tweets)
+    rand_index = random.randint(0, len(alltweets)/2)
 
-    tweet_id = str(alltweets[random.randint(0, len(alltweets)/2)].id)
+    while (alltweets[rand_index].text.startswith("RT")):   
+        rand_index = random.randint(0, len(alltweets)/2)
 
+    tweet_id = str(alltweets[rand_index].id)
+    
     return tweet_id
 
 def get_markov_tweet(screen_name):
@@ -77,4 +73,14 @@ def get_markov_tweet(screen_name):
     # Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
 
-#get_all_tweets("quit_cryan")
+def remove_retweets(outtweets):
+    for tweet in range(0,len(outtweets)):
+        outtweets[tweet]= re.sub(r"http\S+", "",outtweets[tweet])
+
+        if(outtweets[tweet].startswith("RT")):
+            outtweets[tweet] = ""
+        outtweets[tweet] = outtweets[tweet].replace("&lt;", "<");
+        outtweets[tweet] = outtweets[tweet].replace("&gt;", ">");
+        outtweets[tweet] = outtweets[tweet].replace("&amp;", "&");
+
+    return outtweets
