@@ -41,7 +41,7 @@ function make_tweet_ui(tweet_text, rand_id) {
       {
         conversation: 'none',
         cards: 'hidden',
-        align: 'center',
+        align: 'center'
       }).then(function(el) {
         
         var e = el.contentDocument;
