@@ -1,6 +1,9 @@
 $(function() {
    
 var submit_form = function(e){ 
+  $("#instructions").fadeOut();
+  $("#spinner").addClass("is-active");
+  $("#spinner").fadeIn();
   $.getJSON($SCRIPT_ROOT + '/_get_tweet', {
     handle: $('input[name="handle"]').val(),
   }, function(data) {
@@ -27,9 +30,11 @@ function pick_random_user()
   $('#tweetlabel').html("<label>" + user + "</label>");
 }
 function make_tweet_ui(tweet_text, rand_id) {
+    $("#spinner").slideUp();
+    $("#spinner").removeClass("is-active");
+    var id = new Date().getUTCMilliseconds();;
+    $("#tweet").prepend('<div id="' + id + '"' + 'style="display:none"></div>');
     twttr.ready(function(){
-    var id = Math.floor(Math.random() * 500);
-    $("#tweet").prepend("<div id=" + id + "></div>");
     twttr.widgets.createTweet(
       // Replace this with the Tweet ID
       rand_id, document.getElementById("" + id),
@@ -43,7 +48,8 @@ function make_tweet_ui(tweet_text, rand_id) {
         // Change the tweet text
         var html = e.querySelector(".Tweet-text");
         html.innerHTML = tweet_text;
-        
+
+        $("#" + id).fadeIn('fast');
     });
 });
 }
