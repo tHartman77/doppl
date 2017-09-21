@@ -4,14 +4,12 @@ import re
 import sys
 import random
 import ConfigParser
-from os.path import exists
 
 config = ConfigParser.ConfigParser()
 
 config.read('config.cfg')
 
 consumer_key        = str(config.get('API', 'CONSUMER_KEY'))
-print(str(config.get('API', 'CONSUMER_KEY')))
 consumer_secret     = str(config.get('API', 'CONSUMER_SECRET'))
 access_token        = str(config.get('API', 'ACCESS_TOKEN'))
 access_token_secret = str(config.get('API', 'ACCESS_TOKEN_SECRET'))
@@ -22,18 +20,14 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 def get_all_tweets(screen_name):
-
-
     alltweets = []
 
     new_tweets = api.user_timeline(screen_name = screen_name, count=200)
 
     alltweets.extend(new_tweets)
     oldest = alltweets[-1].id - 1
-    #print(oldest)
-    while (len(alltweets) < 1000 and len(new_tweets) > 0):
-        #print "getting tweets before %s" % (oldest)
-            
+
+    while (len(alltweets) < 1000 and len(new_tweets) > 0):            
         #all subsiquent requests use the max_id param to prevent duplicates
         new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
         
@@ -43,8 +37,6 @@ def get_all_tweets(screen_name):
         #update the id of the oldest tweet less one
         oldest = alltweets[-1].id - 1
         
-        #print "...%s tweets downloaded so far" % (len(alltweets))
-
     outtweets = [(tweet.text.encode("utf-8") + " ") for tweet in alltweets]
     outtweets = remove_retweets(outtweets)
 
@@ -71,10 +63,6 @@ def get_markov_tweet(screen_name):
 
     # Build the model.
     text_model = markovify.Text(text)
-
-    # Print five randomly-generated sentences
-    # for i in range(5):
-    #    print(text_model.make_sentence())
 
     # Print three randomly-generated sentences of no more than 140 characters
     return text_model.make_short_sentence(140)
