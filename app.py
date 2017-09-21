@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request
-from markovtest import get_markov_tweet, get_rand_id 
+from markov import get_markov_tweet, get_rand_id 
 app = Flask(__name__)
 
 @app.route('/_get_tweet')
