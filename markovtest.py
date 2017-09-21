@@ -3,16 +3,12 @@ import tweepy
 import re
 import sys
 import random
-import ConfigParser
+from os import environ
 
-config = ConfigParser.ConfigParser()
-
-config.read('config.cfg')
-
-consumer_key        = str(config.get('API', 'CONSUMER_KEY'))
-consumer_secret     = str(config.get('API', 'CONSUMER_SECRET'))
-access_token        = str(config.get('API', 'ACCESS_TOKEN'))
-access_token_secret = str(config.get('API', 'ACCESS_TOKEN_SECRET'))
+consumer_key        = environ.get('CONSUMER_KEY')
+consumer_secret     = environ.get('CONSUMER_SECRET')
+access_token        = environ.get('ACCESS_TOKEN')
+access_token_secret = environ.get('ACCESS_TOKEN_SECRET')
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
