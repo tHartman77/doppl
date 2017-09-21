@@ -3,12 +3,18 @@ import tweepy
 import re
 import sys
 import random
+import ConfigParser
 from os.path import exists
 
-consumer_key        = '***REMOVED***'
-consumer_secret     = '***REMOVED***'
-access_token        = '***REMOVED***'
-access_token_secret = '***REMOVED***'
+config = ConfigParser.ConfigParser()
+
+config.read('config.cfg')
+
+consumer_key        = str(config.get('API', 'CONSUMER_KEY'))
+print(str(config.get('API', 'CONSUMER_KEY')))
+consumer_secret     = str(config.get('API', 'CONSUMER_SECRET'))
+access_token        = str(config.get('API', 'ACCESS_TOKEN'))
+access_token_secret = str(config.get('API', 'ACCESS_TOKEN_SECRET'))
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
