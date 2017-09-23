@@ -34,4 +34,4 @@ FLASK_APP=app.py flask run
 ```
 Open http://127.0.0.1:5000 in your browser.
 
-You can view our version hosted by heroku at doppl.herokuapp.com.
+Additionally, you can view our version hosted by heroku at [doppl.herokuapp.com].
