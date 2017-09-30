@@ -77,7 +77,9 @@ def remove_retweets(outtweets):
 
 def check_handle(handle):
     try:
-        api.user_timeline(screen_name = handle, count=1)
+        u = api.get_user(handle)
+        if u.protected:
+            return False
         return True
     except tweepy.TweepError as e:
         pass
