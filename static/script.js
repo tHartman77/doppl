@@ -1,6 +1,12 @@
 $(function() {
    
 var submit_form = function(e){ 
+  if( !$("#handleInput").val()){
+    $("#instructions").css('color', 'red');
+    $("#instructions").text("Please type in a twitter handle");
+    $("#instructions").fadeIn();
+    return;
+  }
   $("#instructions").fadeOut();
   $("#spinner").addClass("is-active");
   $("#spinner").fadeIn();
@@ -8,6 +14,14 @@ var submit_form = function(e){
     handle: $('input[name="handle"]').val(),
   }, function(data) {
   var markov_tweet = data.result;
+  if(markov_tweet == 'error'){
+    $("#spinner").slideUp();
+    $("#spinner").removeClass("is-active");
+    $("#instructions").css('color', 'red');
+    $("#instructions").text("That twitter handle does not exist or is not public");
+    $("#instructions").fadeIn();
+    return;
+  }
   var rand_id = data.rand_id;  
   make_tweet_ui(markov_tweet, rand_id);
     //$('#result').text(data.result);

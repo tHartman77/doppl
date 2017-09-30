@@ -74,3 +74,11 @@ def remove_retweets(outtweets):
         outtweets[tweet] = outtweets[tweet].replace("&amp;", "&");
 
     return outtweets
+
+def check_handle(handle):
+    try:
+        api.user_timeline(screen_name = handle, count=1)
+        return True
+    except tweepy.TweepError as e:
+        pass
+    return False
